@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather App</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <script defer src="main.js"></script>
+  <link rel="stylesheet" href="https://chiefwoods.github.io/footer-template/template.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="icons/day/116.png">
+</head>
+
+<body>
+  <header>
+    <form>
+      <input type="text" placeholder="Search Location or Zip Code" class="search-input">
+      <button class="search-button">
+        <img src="./icons/magnify.svg" alt="Search">
+      </button>
+    </form>
+    <div>
+      <span class="toggle-text">&deg;C</span>
+      <label for="measurement" class="toggle">
+        <input type="checkbox" id="measurement">
+        <div class="slider"></div>
+      </label>
+      <span class="toggle-text">&deg;F</span>
+    </div>
+  </header>
+  <main>
+    <div class="current-info">
+      <p class="error">Location not found.<br>Search must be in the form of "City", "City, State" or "City, Country".</p>
+      <div class="container">
+        <p class="current-location">Petaling Jaya, Kuala Lumpur</p>
+        <p class="current-day">Sunday, 17 September</p>
+        <p class="current-time">4:32 pm</p>
+        <p class="current-temp">30 &deg;C</p>
+        <img src="./icons/day/176.png" alt="Patchy rain possible" class="current-condition">
+        <p class="condition-text">Patchy rain possible</p>
+      </div>
+    </div>
+    <ul class="current-detail">
+      <li>
+        <img src="./icons/thermometer-lines.svg" alt="Feels Like" class="detail-icon">
+        <p class="detail-title">Feels Like</p>
+        <p class="detail-text">33 &deg;C</p>
+      </li>
+      <li>
+        <img src="./icons/weather-pouring.svg" alt="Precipitation" class="detail-icon">
+        <p class="detail-title">Precipitation</p>
+        <p class="detail-text">0.4 mm</p>
+      </li>
+      <li>
+        <img src="./icons/water-percent.svg" alt="Humidity" class="detail-icon">
+        <p class="detail-title">Humidity</p>
+        <p class="detail-text">67 %</p>
+      </li>
+      <li>
+        <img src="./icons/weather-windy.svg" alt="Wind Speed" class="detail-icon">
+        <p class="detail-title">Wind Speed</p>
+        <p class="detail-text">4.7 km/h</p>
+      </li>
+    </ul>
+  </main>
+  <section>
+    <div class="forecast-options">
+      <button class="hourly-button">Hourly</button>
+      <button class="daily-button">Daily</button>
+    </div>
+    <ul class="forecast-hourly">
+      <li>
+        <p class="hourly-time">Now</p>
+        <img src="./icons/night/113.png" alt="Clear" class="forecast-icons">
+        <p class="hourly-temp">25 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">1 am</p>
+        <img src="./icons/night/176.png" alt="Patchy rain possible" class="forecast-icons">
+        <p class="hourly-temp">25 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">2 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">3 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">4 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">5 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">6 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">7 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">8 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">9 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">10 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">11 am</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">12 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">1 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">2 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">3 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">4 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">5 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">6 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">7 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">8 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">9 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">10 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+      <li>
+        <p class="hourly-time">11 pm</p>
+        <img src="./icons/day/365.png" alt="Moderate or heavy sleet showers" class="forecast-icons">
+        <p class="hourly-temp">24 &deg;C</p>
+      </li>
+    </ul>
+    <!-- <ul class="forecast-daily">
+      <li>
+        <p class="daily-day">Today</p>
+        <img src="./icons/day/113.png" alt="Clear" class="forecast-icons">
+        <p class="daily-temp-max">31 &deg;C</p>
+        <p class="daily-temp-min">22 &deg;C</p>
+      </li>
+      <li>
+        <p class="daily-day">Wed</p>
+        <img src="./icons/day/308.png" alt="Heavy rain" class="forecast-icons">
+        <p class="daily-temp-max">27 &deg;C</p>
+        <p class="daily-temp-min">20 &deg;C</p>
+      </li>
+      <li>
+        <p class="daily-day">Thu</p>
+        <img src="./icons/day/116.png" alt="Partly cloudy" class="forecast-icons">
+        <p class="daily-temp-max">30 &deg;C</p>
+        <p class="daily-temp-min">23 &deg;C</p>
+      </li>
+    </ul> -->
+  </section>
+  <div class="overlay">
+    <p>Fetching data...</p>
+  </div>
+  <footer>
+    <span class="made-by">Copyright @
+      <script>document.write(new Date().getFullYear())</script> ChiefWoods
+    </span>
+    <a class="github-link" href="https://github.com/ChiefWoods/weather-app" target="_blank">
+      <img src="./icons/github.svg" class="github-icon" alt="GitHub">
+    </a>
+  </footer>
+</body>
+
+</html>
