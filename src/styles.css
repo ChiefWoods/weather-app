@@ -12,6 +12,7 @@
   --fs-m: 2.4rem;
   --fs-s: 1.8rem;
   --fs-xs: 1.5rem;
+  --fs-xxs: 1.2rem;
   --toggle-width: 40px;
   --toggle-height: calc(var(--toggle-width) / 2);
   --slider-height: calc(var(--toggle-height) * 0.8);
@@ -142,6 +143,17 @@ main {
 }
 
 /* Current */
+
+.current-info {
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+}
+
+.error {
+  font-size: var(--fs-xxs);
+  visibility: hidden;
+  margin-bottom: 20px;
+}
 
 .current-location, .condition-text {
   font-size: var(--fs-l);
@@ -304,6 +316,10 @@ section > ul::-webkit-scrollbar-thumb {
 
   main {
     align-items: unset;
+  }
+
+  .current-info {
+    grid-template-rows: 1fr auto;
   }
 
   .current-detail {
