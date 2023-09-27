@@ -1,6 +1,8 @@
 import Storage from "./Storage.js";
 
 export const Utility = (() => {
+  const weatherIcons = importAll(require.context('../icons/', false, /\.png$/));
+
   const initialize = () => {
     getForecast('auto:ip').then(forecast => {
       changeDocumentTitle(forecast.location);
@@ -38,11 +40,22 @@ export const Utility = (() => {
     document.title = `${location.name}, ${location.region || location.country} | Weather App`;
   }
 
+  const importAll = r => {
+    return r.keys().map(r);
+  }
+
+  const getImgSrc = icon => {
+    const iconPath = icon.split('/').slice(-2).join('/');
+    return weatherIcons[iconPath];
+  }
+
   return {
+    weatherIcons,
     initialize,
     createText,
     createImg,
     getForecast,
-    changeDocumentTitle
+    changeDocumentTitle,
+    getImgSrc
   }
 })();
