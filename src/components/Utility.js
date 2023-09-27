@@ -1,3 +1,7 @@
+import { Header } from "./Header.js";
+import { Main } from "./Main.js";
+import { Section } from "./Section.js";
+import { Footer } from "./Footer.js";
 import Storage from "./Storage.js";
 
 export const Utility = (() => {
@@ -6,6 +10,13 @@ export const Utility = (() => {
   const initialize = () => {
     getForecast('auto:ip').then(forecast => {
       changeDocumentTitle(forecast.location);
+      document.body.append(
+        Header.createHeader(),
+        Main.createMain(forecast),
+        Section.createSection(forecast),
+        createOverlay(),
+        Footer.createFooter()
+      );
     })
 
     if (!Storage.isMetric()) {
@@ -13,7 +24,7 @@ export const Utility = (() => {
     }
   }
 
-  const createText = (element, className, content = null) => {
+  const createText = (element, className, content = '') => {
     const text = document.createElement(element);
     text.classList.add(...className);
     text.textContent = content;
@@ -47,6 +58,15 @@ export const Utility = (() => {
   const getImgSrc = icon => {
     const iconPath = icon.split('/').slice(-2).join('/');
     return weatherIcons[iconPath];
+  }
+
+  const createOverlay = () => {
+    const div = createText('div', ['overlay']);
+    const p = createText('p', null, 'Fetching data...');
+
+    div.append(p);
+
+    return div;
   }
 
   return {
