@@ -68,6 +68,10 @@ export const Header = (() => {
           Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
           document.querySelector('main').replaceWith(Main.createMain(forecast));
           document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
+          Main.hideError();
+        })
+        .catch(() => {
+          Main.displayError();
         })
       searchInput.value = '';
     })

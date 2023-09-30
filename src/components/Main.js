@@ -91,6 +91,16 @@ export const Main = (() => {
     return li;
   }
 
+  const displayError = () => {
+    const error = document.querySelector('.error');
+    error.style.visibility = 'visible';
+  }
+
+  const hideError = () => {
+    const error = document.querySelector('.error');
+    error.style.visibility = 'hidden';
+  }
+
   const getLocation = location => {
     return `${location.name}, ${location.region || location.country}`;
   }
@@ -107,5 +117,9 @@ export const Main = (() => {
     return `${isMetric ? `${Math.round(current.temp_c)} &deg;C` : `${Math.round(current.temp_f)} &deg;F`}`;
   }
 
-  return { createMain }
+  return {
+    createMain,
+    displayError,
+    hideError
+  }
 })();
