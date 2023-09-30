@@ -63,6 +63,7 @@ export const Header = (() => {
           ? Utility.changeDocumentTitle(forecast.location)
           : document.querySelector('.error').style.visibility = 'visible';
       })
+          Utility.changeDocumentTitle(forecast.location);
           Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
       searchInput.value = '';
     })
