@@ -102,7 +102,7 @@ export const Main = (() => {
   }
 
   const getLocation = location => {
-    return `${location.name}, ${location.region || location.country}`;
+    return `${location.name}, ${location.country}`;
   }
 
   const getDay = localtime => {

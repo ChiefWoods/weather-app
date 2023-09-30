@@ -75,7 +75,7 @@ export const Utility = (() => {
   }
 
   const changeDocumentTitle = location => {
-    document.title = `${location.name}, ${location.region || location.country} | Weather App`;
+    document.title = `${location.name}, ${location.country} | Weather App`;
   }
 
   const changeBackground = (code, localtime) => {
