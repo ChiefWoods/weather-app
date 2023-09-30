@@ -1,5 +1,7 @@
-import { Utility } from "./Utility.js";
-import Storage from "./Storage.js";
+import { Utility } from './Utility.js';
+import { Main } from './Main.js';
+import { Section } from './Section.js';
+import Storage from './Storage.js';
 import search from '../icons/magnify.svg';
 
 export const Header = (() => {
@@ -61,6 +63,7 @@ export const Header = (() => {
           ? Utility.changeDocumentTitle(forecast.location)
           : document.querySelector('.error').style.visibility = 'visible';
       })
+          Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
       searchInput.value = '';
     })
   }
