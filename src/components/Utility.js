@@ -100,6 +100,11 @@ export const Utility = (() => {
     return div;
   }
 
+  const toggleOverlay = () => {
+    const overlay = document.querySelector('.overlay');
+    overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+  }
+
   function importAllBackgrounds(r) {
     r.keys().forEach(r);
   }

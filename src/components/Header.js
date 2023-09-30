@@ -58,13 +58,14 @@ export const Header = (() => {
     button.addEventListener('click', e => {
       e.preventDefault();
       const searchInput = button.previousElementSibling;
-      Utility.getForecast(searchInput.value).then(forecast => {
-        forecast.location
-          ? Utility.changeDocumentTitle(forecast.location)
-          : document.querySelector('.error').style.visibility = 'visible';
-      })
+      Utility.toggleOverlay();
+      Utility.getForecast(searchInput.value)
+        .then(forecast => {
+          Utility.toggleOverlay();
+          Storage.setForecast(forecast);
           Utility.changeDocumentTitle(forecast.location);
           Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
+        })
       searchInput.value = '';
     })
   }
