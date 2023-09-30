@@ -1,6 +1,6 @@
-import { Utility } from "./Utility.js";
-import Storage from "./Storage.js";
-import { parseISO, format } from 'date-fns';
+import { Utility } from './Utility.js';
+import Storage from './Storage.js';
+import { format } from 'date-fns';
 import feelsLike from '../icons/thermometer-lines.svg';
 import precipitation from '../icons/weather-pouring.svg';
 import humidity from '../icons/water-percent.svg';
@@ -8,7 +8,7 @@ import windSpeed from '../icons/weather-windy.svg';
 
 export const Main = (() => {
   const createMain = forecast => {
-    const main = document.createElement("main");
+    const main = document.createElement('main');
     const isMetric = Storage.isMetric();
 
     main.append(
@@ -23,13 +23,13 @@ export const Main = (() => {
     const div = Utility.createText('div', ['current-info']);
 
     const error = Utility.createText('p', ['error']);
-    error.innerhtml = 'Location not found.<br>Search must be in the form of "City", "City, State" or "City, Country".';
+    error.innerHTML = 'Location not found.<br>Search must be in the form of "City", "City, State" or "City, Country".';
 
     const container = document.createElement('div');
 
     const location = Utility.createText('p', ['current-location'], getLocation(forecast.location));
-    const day = Utility.createText('p', ['current-day'], getDay(forecast.location));
-    const time = Utility.createText('p', ['current-time'], getTime(forecast.location));
+    const day = Utility.createText('p', ['current-day'], getDay(forecast.location.localtime));
+    const time = Utility.createText('p', ['current-time'], getTime(forecast.location.localtime));
     const temp = Utility.createText('p', ['current-temp'], getTemp(forecast.current, isMetric));
     const img = Utility.createImg(Utility.getImgSrc(forecast.current.condition.icon), ['current-condition'], forecast.current.condition.text);
     const condition = Utility.createText('p', ['condition-text'], forecast.current.condition.text);
@@ -72,8 +72,8 @@ export const Main = (() => {
     const text = (() => {
       const content = detail === 'Feels Like'
         ? isMetric
-          ? `${Math.round(current.feelslike_c)} &deg;C`
-          : `${Math.round(current.feelslike_f)} &deg;F`
+          ? `${Math.round(current.feelslike_c)} °C`
+          : `${Math.round(current.feelslike_f)} °F`
         : detail === 'Precipitation'
           ? isMetric
             ? `${current.precip_mm} mm`
@@ -105,16 +105,18 @@ export const Main = (() => {
     return `${location.name}, ${location.region || location.country}`;
   }
 
-  const getDay = location => {
-    return format(parseISO(location.localtime), 'EEEE, d MMMM');
+  const getDay = localtime => {
+    const [year, month, day] = localtime.split(' ')[0].split('-');
+    return format(new Date(year, month - 1, day), 'EEEE, dd MMMM');
   }
 
-  const getTime = location => {
-    return format(parseISO(location.localtime), 'h:mm a');
+  const getTime = localtime => {
+    const [hours, minutes] = localtime.split(' ')[1].split(':');
+    return format(new Date().setHours(hours, minutes), 'h:mm a');
   }
 
   const getTemp = (current, isMetric) => {
-    return `${isMetric ? `${Math.round(current.temp_c)} &deg;C` : `${Math.round(current.temp_f)} &deg;F`}`;
+    return `${isMetric ? `${Math.round(current.temp_c)} °C` : `${Math.round(current.temp_f)} °F`}`;
   }
 
   return {

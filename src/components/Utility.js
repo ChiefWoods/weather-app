@@ -19,6 +19,15 @@ export const Utility = (() => {
 
   const initialize = () => {
     addCSSTemplate();
+
+    if (Storage.isMetric() === null) {
+      Storage.setSystem(true);
+    }
+
+    if (Storage.isHourly() === null) {
+      Storage.setHourly(true);
+    }
+
     getForecast('auto:ip').then(forecast => {
       Storage.setForecast(forecast);
       changeDocumentTitle(forecast.location);
@@ -26,15 +35,11 @@ export const Utility = (() => {
       document.body.append(
         Header.createHeader(),
         Main.createMain(forecast),
-        Section.createSection(forecast),
+        Section.createSection(forecast, Storage.isHourly()),
         createOverlay(),
         Footer.createFooter()
       );
     })
-
-    if (!Storage.isMetric()) {
-      Storage.setSystem(true);
-    }
   }
 
   const createText = (element, className, content = '') => {
@@ -55,9 +60,10 @@ export const Utility = (() => {
   }
 
   const getForecast = async (locationName) => {
-    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=dfd6961846f943ac97273304232604&q=${locationName}&days=7`)
-    const forecast = await response.json();
-    return forecast;
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=dfd6961846f943ac97273304232604&q=${locationName}&days=7`, {
+      mode: 'cors'
+    });
+    return await response.json();
   }
 
   const addCSSTemplate = () => {
@@ -94,7 +100,7 @@ export const Utility = (() => {
 
   const createOverlay = () => {
     const div = createText('div', ['overlay']);
-    const p = createText('p', null, 'Fetching data...');
+    const p = createText('p', [], 'Fetching data...');
 
     div.append(p);
 

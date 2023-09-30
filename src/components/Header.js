@@ -22,7 +22,7 @@ export const Header = (() => {
 
     const button = Utility.createText('button', ['search-button']);
     addSearchHandler(button);
-    
+
     const searchIcon = Utility.createImg(search, '', 'Search');
 
     button.append(searchIcon);
@@ -33,7 +33,7 @@ export const Header = (() => {
 
   const createSwitch = () => {
     const div = document.createElement('div');
-    const toggleCelcius = Utility.createText('span', ['toggle-text'], '&#176C');
+    const toggleCelcius = Utility.createText('span', ['toggle-text'], '°C');
 
     const label = Utility.createText('label', ['toggle']);
     label.htmlFor = 'measurement';
@@ -48,7 +48,7 @@ export const Header = (() => {
 
     label.append(input, slider);
 
-    const toggleFahrenheit = Utility.createText('span', ['toggle-text'], '&#176F');
+    const toggleFahrenheit = Utility.createText('span', ['toggle-text'], '°F');
 
     div.append(toggleCelcius, label, toggleFahrenheit);
 

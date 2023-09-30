@@ -3,14 +3,15 @@ import Storage from './Storage.js';
 import { format } from 'date-fns';
 
 export const Section = (() => {
-  const createSection = () => {
+  const createSection = (forecast, isHourly) => {
     const section = document.createElement('section');
     const isMetric = Storage.isMetric();
 
     section.append(
       createOptions(),
-      createForecastHourly(forecast, isMetric),
-      createForecastDaily(forecast, isMetric)
+      isHourly
+        ? createForecastHourly(forecast, isMetric)
+        : createForecastDaily(forecast, isMetric)
     )
 
     return section;
@@ -35,7 +36,7 @@ export const Section = (() => {
   const createForecastHourly = (forecast, isMetric) => {
     const ul = Utility.createText('ul', ['forecast-hourly']);
 
-    const currentHour = forecast.location.localtime.split(' ')[1].split(':')[0];
+    const currentHour = forecast.current.last_updated.split(' ')[1].split(':')[0];
     const firstTwoDays = [forecast.forecast.forecastday[0], forecast.forecast.forecastday[1]];
     const firstTwoDaysHours = firstTwoDays.flatMap(dayObj => dayObj.hour);
     const index = firstTwoDaysHours.findIndex(hourObj => hourObj.time.split(' ')[1].split(':')[0] === currentHour);
@@ -68,7 +69,7 @@ export const Section = (() => {
     const ul = Utility.createText('ul', ['forecast-daily']);
 
     const todayDate = forecast.location.localtime.split(' ')[0];
-    const weekDays = [forecast.forecast.forecastday[0].day, forecast.forecast.forecastday[1].day, forecast.forecast.forecastday[2].day]; 
+    const weekDays = [forecast.forecast.forecastday[0], forecast.forecast.forecastday[1], forecast.forecast.forecastday[2]];
     const liArr = [];
 
     for (const dayObj of weekDays) {
@@ -129,15 +130,15 @@ export const Section = (() => {
   }
 
   const getTempHourly = (hourObj, isMetric) => {
-    return `${isMetric ? `${Math.round(hourObj.temp_c)} &deg;C` : `${Math.round(hourObj.temp_f)} &deg;F`}`;
+    return `${isMetric ? `${Math.round(hourObj.temp_c)} °C` : `${Math.round(hourObj.temp_f)} °F`}`;
   }
 
   const getMaxTemp = (dayObj, isMetric) => {
-    return `${isMetric ? `${Math.round(dayObj.maxtemp_c)} &deg;C` : `${Math.round(dayObj.maxtemp_f)} &deg;F`}`;
+    return `${isMetric ? `${Math.round(dayObj.day.maxtemp_c)} °C` : `${Math.round(dayObj.day.maxtemp_f)} °F`}`;
   }
 
   const getMinTemp = (dayObj, isMetric) => {
-    return `${isMetric ? `${Math.round(dayObj.mintemp_c)} &deg;C` : `${Math.round(dayObj.mintemp_f)} &deg;F`}`;
+    return `${isMetric ? `${Math.round(dayObj.day.mintemp_c)} °C` : `${Math.round(dayObj.day.mintemp_f)} °F`}`;
   }
 
   return { createSection }
