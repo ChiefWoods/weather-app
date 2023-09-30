@@ -1,5 +1,5 @@
-import { Utility } from "./Utility.js";
-import Storage from "./Storage.js";
+import { Utility } from './Utility.js';
+import Storage from './Storage.js';
 import { format } from 'date-fns';
 
 export const Section = (() => {
@@ -79,7 +79,7 @@ export const Section = (() => {
     const li = document.createElement('li');
 
     const day = Utility.createText('p', ['daily-day'], isToday ? 'Today' : formatDay(dayObj.date));
-    const img = Utility.createImg(Utility.getImgSrc(dayObj.condition.icon), ['forecast-icons'], dayObj.condition.text);
+    const img = Utility.createImg(Utility.getImgSrc(dayObj.day.condition.icon), ['forecast-icons'], dayObj.day.condition.text);
     const tempMax = Utility.createText('p', ['daily-temp-max'], getMaxTemp(dayObj, isMetric));
     const tempMin = Utility.createText('p', ['daily-temp-min'], getMinTemp(dayObj, isMetric));
 

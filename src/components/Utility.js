@@ -1,11 +1,11 @@
-import { Header } from "./Header.js";
-import { Main } from "./Main.js";
-import { Section } from "./Section.js";
-import { Footer } from "./Footer.js";
-import Storage from "./Storage.js";
+import { Header } from './Header.js';
+import { Main } from './Main.js';
+import { Section } from './Section.js';
+import { Footer } from './Footer.js';
+import Storage from './Storage.js';
 
 export const Utility = (() => {
-  const weatherIcons = importAll(require.context('../icons/', false, /\.png$/));
+  const weatherIcons = importAllIcons(require.context('../icons', true, /\.png$/));
 
   const initialize = () => {
     getForecast('auto:ip').then(forecast => {
@@ -51,13 +51,11 @@ export const Utility = (() => {
     document.title = `${location.name}, ${location.region || location.country} | Weather App`;
   }
 
-  const importAll = r => {
-    return r.keys().map(r);
-  }
 
   const getImgSrc = icon => {
-    const iconPath = icon.split('/').slice(-2).join('/');
-    return weatherIcons[iconPath];
+    const arr = icon.split('/');
+    const parentFolder = arr[arr.length - 2];
+    return weatherIcons[parentFolder][truncateNum(icon)];
   }
 
   const createOverlay = () => {
@@ -69,8 +67,26 @@ export const Utility = (() => {
     return div;
   }
 
+  function importAllIcons(r) {
+    const icons = {
+      'day': {},
+      'night': {},
+    };
+
+    r.keys().forEach(item => {
+      const parentFolder = item.split('/')[1];
+      icons[parentFolder][truncateNum(item)] = r(item);
+    })
+    return icons;
+  }
+
+  function truncateNum(item) {
+    const start = item.lastIndexOf('/') + 1;
+    const end = item.lastIndexOf('.');
+    return parseInt(item.slice(start, end));
+  }
+
   return {
-    weatherIcons,
     initialize,
     createText,
     createImg,
