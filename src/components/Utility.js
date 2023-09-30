@@ -18,6 +18,7 @@ export const Utility = (() => {
   }
 
   const initialize = () => {
+    addCSSTemplate();
     getForecast('auto:ip').then(forecast => {
       changeDocumentTitle(forecast.location);
       changeBackground(forecast.current.condition.code, forecast.location.localtime);
@@ -56,6 +57,14 @@ export const Utility = (() => {
     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=dfd6961846f943ac97273304232604&q=${locationName}&days=7`)
     const forecast = await response.json();
     return forecast;
+  }
+
+  const addCSSTemplate = () => {
+    const link = document.createElement('link');
+    link.href = 'https://chiefwoods.github.io/footer-template/template.css';
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    document.head.appendChild(link);
   }
 
   const changeDocumentTitle = location => {
