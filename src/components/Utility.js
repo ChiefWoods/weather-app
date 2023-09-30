@@ -20,6 +20,7 @@ export const Utility = (() => {
   const initialize = () => {
     addCSSTemplate();
     getForecast('auto:ip').then(forecast => {
+      Storage.setForecast(forecast);
       changeDocumentTitle(forecast.location);
       changeBackground(forecast.current.condition.code, forecast.location.localtime);
       document.body.append(

@@ -18,8 +18,14 @@ export const Section = (() => {
 
   const createOptions = () => {
     const div = Utility.createText('div', ['forecast-options']);
-    const hourly = Utility.createText('button', ['selected'], 'Hourly');
-    const daily = Utility.createText('button', null, 'Daily');
+
+    const hourly = Utility.createText('button', ['hourly-button'], 'Hourly');
+    hourly.disabled = Storage.isHourly();
+    addHourlyHandler(hourly);
+
+    const daily = Utility.createText('button', ['daily-button'], 'Daily');
+    daily.disabled = !Storage.isHourly();
+    addDailyHandler(daily);
 
     div.append(hourly, daily);
 
@@ -86,6 +92,30 @@ export const Section = (() => {
     li.append(day, img, tempMax, tempMin);
 
     return li;
+  }
+
+  const addHourlyHandler = button => {
+    button.addEventListener('click', () => {
+      Storage.setHourly(true);
+      toggleDisabled();
+      document.querySelector('.forecast-daily').replaceWith(createForecastHourly(Storage.getForecast(), Storage.isMetric()));
+    })
+  }
+
+  const addDailyHandler = button => {
+    button.addEventListener('click', () => {
+      Storage.setHourly(false);
+      toggleDisabled();
+      document.querySelector('.forecast-hourly').replaceWith(createForecastDaily(Storage.getForecast(), Storage.isMetric()));
+    })
+  }
+
+  const toggleDisabled = () => {
+    const hourly = document.querySelector('.hourly-button');
+    const daily = document.querySelector('.daily-button');
+
+    hourly.disabled = !hourly.disabled;
+    daily.disabled = !daily.disabled;
   }
 
   const formatTime = timeStr => {

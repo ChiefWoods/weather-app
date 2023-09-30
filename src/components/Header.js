@@ -41,6 +41,7 @@ export const Header = (() => {
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.id = 'measurement';
+    input.checked = !Storage.isMetric();
 
     const slider = Utility.createText('div', ['slider']);
     addToggleHandler(slider);
@@ -65,6 +66,8 @@ export const Header = (() => {
           Storage.setForecast(forecast);
           Utility.changeDocumentTitle(forecast.location);
           Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
+          document.querySelector('main').replaceWith(Main.createMain(forecast));
+          document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
         })
       searchInput.value = '';
     })
@@ -74,6 +77,9 @@ export const Header = (() => {
     slider.addEventListener('click', e => {
       e.stopPropagation();
       Storage.toggleSystem();
+      const forecast = Storage.getForecast();
+      document.querySelector('main').replaceWith(Main.createMain(forecast));
+      document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
     })
   }
 
