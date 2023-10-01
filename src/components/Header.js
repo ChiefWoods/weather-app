@@ -58,22 +58,19 @@ export const Header = (() => {
   const addSearchHandler = button => {
     button.addEventListener('click', e => {
       e.preventDefault();
-      const searchInput = button.previousElementSibling;
       Utility.toggleOverlay();
+      const searchInput = button.previousElementSibling;
       Utility.getForecast(searchInput.value)
         .then(forecast => {
-          Utility.toggleOverlay();
-          Storage.setForecast(forecast);
-          Utility.changeDocumentTitle(forecast.location);
-          Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
-          document.querySelector('main').replaceWith(Main.createMain(forecast));
-          document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
-          Main.hideError();
+          updateForecast(forecast);
         })
         .catch(() => {
           Main.displayError();
         })
-      searchInput.value = '';
+        .finally(() => {
+          searchInput.value = '';
+          Utility.toggleOverlay();
+        })
     })
   }
 
@@ -85,6 +82,15 @@ export const Header = (() => {
       document.querySelector('main').replaceWith(Main.createMain(forecast));
       document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
     })
+  }
+
+  const updateForecast = forecast => {
+    Storage.setForecast(forecast);
+    Utility.changeDocumentTitle(forecast.location);
+    Utility.changeBackground(forecast.current.condition.code, forecast.location.localtime);
+    document.querySelector('main').replaceWith(Main.createMain(forecast));
+    document.querySelector('section').replaceWith(Section.createSection(forecast, Storage.isHourly()));
+    Main.hideError();
   }
 
   return { createHeader }

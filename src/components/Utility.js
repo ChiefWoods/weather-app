@@ -5,8 +5,8 @@ import { Footer } from './Footer.js';
 import Storage from './Storage.js';
 
 export const Utility = (() => {
-  importAllBackgrounds(require.context('../images', false, /\.jpg$/));
-  const weatherIcons = importAllIcons(require.context('../icons', true, /\.png$/));
+  importAll(require.context('../images', false, /\.jpg$/));
+  importAll(require.context('../icons', true, /\.png$/));
 
   const weatherCodes = {
     'cloudy': [1006, 1009],
@@ -92,12 +92,6 @@ export const Utility = (() => {
     document.body.style.backgroundImage = `url('images/${weather}.jpg')`;
   }
 
-  const getImgSrc = icon => {
-    const arr = icon.split('/');
-    const parentFolder = arr[arr.length - 2];
-    return weatherIcons[parentFolder][truncateNum(icon)];
-  }
-
   const createOverlay = () => {
     const div = createText('div', ['overlay']);
     const p = createText('p', [], 'Fetching data...');
@@ -112,27 +106,21 @@ export const Utility = (() => {
     overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
   }
 
-  function importAllBackgrounds(r) {
-    r.keys().forEach(r);
+  const getImgSrc = icon => {
+    const arr = icon.split('/');
+    const parentFolder = arr[arr.length - 2];
+    const num = extractNum(icon);
+    return `./icons/${parentFolder}/${num}.png`;
   }
 
-  function importAllIcons(r) {
-    const icons = {
-      'day': {},
-      'night': {},
-    };
-
-    r.keys().forEach(item => {
-      const parentFolder = item.split('/')[1];
-      icons[parentFolder][truncateNum(item)] = r(item);
-    })
-    return icons;
-  }
-
-  function truncateNum(item) {
+  const extractNum = item => {
     const start = item.lastIndexOf('/') + 1;
     const end = item.lastIndexOf('.');
     return parseInt(item.slice(start, end));
+  }
+
+  function importAll(r) {
+    r.keys().forEach(r);
   }
 
   return {
@@ -142,7 +130,7 @@ export const Utility = (() => {
     getForecast,
     changeDocumentTitle,
     changeBackground,
-    getImgSrc,
-    toggleOverlay
+    toggleOverlay,
+    getImgSrc
   }
 })();
