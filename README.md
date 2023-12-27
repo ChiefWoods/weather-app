@@ -1,6 +1,6 @@
 # Weather App
 
-![Landing Screenshot](src/images/landing_screenshot.png)
+![Screenshot](screenshot.png)
 
 Weather forecast site for [The Odin Project](https://www.theodinproject.com/).
 
@@ -17,11 +17,11 @@ Weather forecast site for [The Odin Project](https://www.theodinproject.com/).
 
 ## Built With
 
-### Tools and Languages
+### Languages
 
-- [![HTML5](https://img.shields.io/badge/HTML5-white?style=for-the-badge&logo=html5)](https://html5.org/)
-- [![CSS3](https://img.shields.io/badge/CSS3-306AF1?style=for-the-badge&logo=css3)](https://www.w3.org/Style/CSS/Overview.en.html)
-- [![JavaScript](https://img.shields.io/badge/Javascript-black?style=for-the-badge&logo=javascript)](https://js.org/index.html)
+- [![HTML5](https://img.shields.io/badge/HTML5-white?style=for-the-badge&logo=html5&logoColor=e65127)](https://html5.org/)
+- [![CSS3](https://img.shields.io/badge/CSS3-white?style=for-the-badge&logo=css3&logoColor=306AF1)](https://www.w3.org/Style/CSS/Overview.en.html)
+- [![JavaScript](https://img.shields.io/badge/Javascript-383936?style=for-the-badge&logo=javascript)](https://js.org/index.html)
 - [![Webpack](https://img.shields.io/badge/webpack-2B3A42?style=for-the-badge&logo=webpack)](https://webpack.js.org/)
 - [![ESLint](https://img.shields.io/badge/eslint-4b32c3?style=for-the-badge&logo=eslint)](https://eslint.org/)
 
@@ -29,12 +29,15 @@ Weather forecast site for [The Odin Project](https://www.theodinproject.com/).
 
 - [date-fns](https://date-fns.org/)
 
+### Tools
+
+- [![!Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-2c2c32?style=for-the-badge&logo=visual-studio-code&logoColor=007ACC)](https://code.visualstudio.com/)
+
 ## Getting Started
 
 ### Prerequisites
 
 Update your npm package to the latest version.
-
 ```
 npm install npm@latest -g
 ```
