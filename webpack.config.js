@@ -1,46 +1,75 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import { EsbuildPlugin } from "esbuild-loader";
+import esbuild from "esbuild";
+import Dotenv from "dotenv-webpack";
 
-module.exports = {
-  mode: 'production',
-  entry: './src/index.js',
-  devtool: 'inline-source-map',
+export default {
+  mode: "development",
+  entry: "./src/index.js",
+  devtool: "eval-source-map",
   devServer: {
-    static: './dist'
+    static: "dist",
+    client: {
+      logging: "error",
+      overlay: false,
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Weather App',
-      favicon: './src/icons/day/116.png',
-      template: './src/template.html'
-    })
+      template: 'src/template.html',
+      favicon: 'src/icons/favicon.png',
+    }),
+    new Dotenv(),
   ],
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: pathData => {
-      const filepath = path.dirname(pathData.filename).split('/').slice(1).join('/');
-      return `${filepath}/[name][ext]`;
-    },
-    clean: true
-  },
-  resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    publicPath: "auto",
+    filename: "main.[contenthash].js",
+    assetModuleFilename: "[path]/[name].[contenthash].[ext]",
+    clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "esbuild-loader",
+            options: {
+              minify: true,
+              implementation: esbuild,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
+        type: "asset/resource",
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
-      }
-    ]
+        type: "asset/resource",
+      },
+      {
+        test: /.js$/,
+        loader: "esbuild-loader",
+        options: {
+          target: "esnext",
+          implementation: esbuild,
+        },
+      },
+    ],
   },
+  optimization: {
+    minimizer: [
+      new EsbuildPlugin({
+        target: "esnext",
+        implementation: esbuild,
+        css: true,
+      }),
+    ],
+  },
+  stats: 'minimal',
 };

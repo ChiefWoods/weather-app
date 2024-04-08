@@ -1,2 +1,4 @@
 node_modules
 *.Identifier
+dist
+.env
