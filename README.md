@@ -4,7 +4,7 @@
 
 Weather forecast site for [The Odin Project](https://www.theodinproject.com/).
 
-[Live Website](https://chiefwoods.github.io/weather-app/)  
+[Live Website](https://chiefwoods.github.io/weather-app/)
 
 [Source Repository](https://github.com/ChiefWoods/weather-app)
 
@@ -43,6 +43,7 @@ Weather forecast site for [The Odin Project](https://www.theodinproject.com/).
 ### Prerequisites
 
 Update your npm package to the latest version.
+
 ```
 npm install npm@latest -g
 ```
@@ -50,18 +51,25 @@ npm install npm@latest -g
 ### Setup
 
 1. Clone the repository
+
 ```
 git clone https://github.com/ChiefWoods/weather-app.git
 ```
+
 2. Install all dependencies
+
 ```
 npm install
 ```
+
 3. Start development server
+
 ```
 npm run start
 ```
+
 4. Build project
+
 ```
 npm run build
 ```
