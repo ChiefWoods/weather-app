@@ -17,8 +17,8 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Weather App",
-      template: "src/template.html",
-      favicon: "src/icons/favicon.png",
+      template: "./src/template.html",
+      favicon: "./src/favicon.png",
     }),
     new Dotenv(),
   ],
