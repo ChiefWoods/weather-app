@@ -53,6 +53,7 @@ export default [
         },
       ],
       "comma-dangle": ["warn", "always-multiline"],
+      "no-process-env": "off",
     },
   },
 ];
